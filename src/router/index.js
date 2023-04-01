@@ -148,8 +148,53 @@ export const constantRoutes = [
         meta: { title: '勋章列表', permission: ['user-medal_list'] }
       }
     ]
-  }
+  },
+  {
+    path: '/authorize',
+    component: Layout,
+    redirect: '/authorize/roleList',
+    name: 'authorize',
+    meta: {
+      title: '授权管理',
+      icon: 'el-icon-lock'
+    },
+    alwaysShow: true,
+    children: [
+      {
+        path: 'roleList',
+        component: () => import('@/views/authorize/roleList'),
+        name: 'RoleList',
+        meta: { title: '角色列表', permission: ['rbac_role-list'] }
+      },
+      {
+        path: 'roleAdd',
+        component: () => import('@/views/authorize/roleAdd'),
+        name: 'RoleAdd',
+        meta: { title: '添加角色', permission: ['rbac_create-role'] },
+        hidden: true
+      },
+      {
+        path: 'roleEdit/:id',
+        component: () => import('@/views/authorize/roleEdit'),
+        name: 'RoleEdit',
+        meta: { title: '编辑角色', permission: ['rbac_update-role'] },
+        hidden: true
+      },
+      {
+        path: 'permissionList',
+        component: () => import('@/views/authorize/permissionList'),
+        name: 'PermissionList',
+        meta: { title: '权限列表', permission: ['rbac_permission-list'] }
+      },
+      {
+        path: 'user',
+        component: () => import('@/views/authorize/userList'),
+        name: 'AuthorizeUser',
+        meta: { title: '管理员列表', permission: ['admin-user_list'] }
+      }
 
+    ]
+  }
 ]
 
 /**

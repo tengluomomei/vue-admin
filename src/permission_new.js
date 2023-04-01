@@ -1,6 +1,5 @@
 import router from './router'
 import store from './store'
-import { Message } from 'element-ui' // 提示组件
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 // 从 cookie中获取token,登录有token, 没有
@@ -33,6 +32,7 @@ router.beforeEach(async(to, from, next) => {
       next({ path: '/' })
       NProgress.done() // hack: https://github.com/PanJiaChen/vue-element-admin/pull/2939
     } else {
+      console.log(store.getters.permissions.reload)
       if (store.getters.permissions.reload) {
         if (to.path !== '/login') {
           await store.dispatch('app2/checkUserLogin', hasToken)
